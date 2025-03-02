@@ -38,18 +38,20 @@ const Result = ({ options }: { options: Option[] }) => {
     try {
       const formatedValues: (string | number)[] = [];
 
-      values.slice(0, -1).forEach((i) => {
-        const prev = formatedValues[formatedValues.length - 1];
+      values
+        .filter((i) => i !== "")
+        .forEach((i) => {
+          const prev = formatedValues[formatedValues.length - 1];
 
-        if (prev && !operators.has(i.toString()) && !operators.has(prev.toString())) {
-          formatedValues.push("*");
-        }
+          if (prev && !operators.has(i.toString()) && !operators.has(prev.toString())) {
+            formatedValues.push("*");
+          }
 
-        if (typeof i === "object") {
-          const find = options.find((option) => option.id === i.id);
-          if (find) formatedValues.push(find.value);
-        } else formatedValues.push(i);
-      });
+          if (typeof i === "object") {
+            const find = options.find((option) => option.id === i.id);
+            if (find) formatedValues.push(find.value);
+          } else formatedValues.push(i);
+        });
 
       setResult(eval(formatedValues.join(" ")));
     } catch (_) {
