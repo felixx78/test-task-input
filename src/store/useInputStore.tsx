@@ -7,6 +7,7 @@ type InputStore = {
 };
 
 const storedValues = localStorage.getItem("values");
+const parsedValues = storedValues && JSON.parse(storedValues);
 
 const formatValues = (values: InputStore["values"]) => {
   const filtered = values.filter(Boolean);
@@ -15,7 +16,7 @@ const formatValues = (values: InputStore["values"]) => {
 };
 
 const useInputStore = create<InputStore>((set) => ({
-  values: (storedValues ? JSON.parse(storedValues) : [""]) as InputStore["values"],
+  values: (parsedValues && parsedValues.length !== 0 ? parsedValues : [""]) as InputStore["values"],
   setValues: (v: InputStore["values"]) => {
     const formatedValues = formatValues(v);
     set({ values: formatedValues });
