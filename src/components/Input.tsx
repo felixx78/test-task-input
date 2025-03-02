@@ -33,7 +33,7 @@ type OptionTagProps = {
 
 const OptionTag = ({ name, onDelete }: OptionTagProps) => {
   return (
-    <div className="mr-2 flex divide-x-2 divide-gray-400 bg-gray-300 px-2 py-0.5 text-sm">
+    <div className="mx-2 flex divide-x-2 divide-gray-400 bg-gray-300 px-2 py-0.5 text-sm">
       <p className="pr-2">{name}</p>
       <button onClick={onDelete} className="cursor-pointer pl-2">
         [X]
